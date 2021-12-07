@@ -21,6 +21,7 @@ class OrdersController < ApplicationController
   end
 
   def update
+    puts 'decision was updated' if params.key?(:notify) && params[:notify].downcase == 'true'
     (order_to_update = @@orders.find { |order| order['id'].to_s == params[:id] }) or not_found
     body = JSON.parse request.raw_post
     order_to_update['decision'] = body['decision']
